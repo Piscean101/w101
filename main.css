@@ -1,0 +1,152 @@
+:root {
+    --backgroundColor: grey;
+    --fadedBorder: rgba(255, 255, 255, 0.25);
+    --nicePink: pink;
+    --niceGreen: rgb(68, 199, 68);
+    --niceBlue: rgb(104, 178, 244);
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--backgroundColor);
+}
+.page {
+    width: 50vw;
+    height: 100vh;
+    overflow-y: auto;
+}
+legend {
+    font-size: 125%;
+    font-family: Impact;
+}
+legend.smol {
+    font-size: 75%;
+}
+select {
+    background-color: transparent;
+    padding: 0.5rem;
+    border: 1px solid white;
+    margin: 0.2rem 1rem;
+}
+input {
+    font-weight: bold;
+    font-size: 120%;
+}
+input:hover, .effect:hover { cursor: pointer;}
+input[type="text"] {
+    padding: 0.75rem;
+}
+.customizer input {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+#spellImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    padding-top: 1.5rem;
+}
+#spellImage div {
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid rgba(255, 0, 0, 0.259); */
+    padding: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#spellImage #spellHeader {
+    justify-content: space-between;
+}
+/* #costTempDisplay {
+    border: 1px solid var(--fadedBorder);
+    padding: 0.4rem;
+    font-weight: bold;
+} */
+#spellName {
+    position: absolute;
+    top: 0;
+    border: 2px solid gold;
+    width: 90%;
+}
+.tempDisplay {
+    border: 1px solid var(--fadedBorder);
+    padding: 0.4rem;
+    font-weight: bold;
+}
+#spellDesc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid purple;
+    width: 90%;
+    min-height: 30vh;
+    max-height: 60vh;
+    flex-wrap: wrap;
+}
+#loreLabel {
+    font-family: Impact;
+    letter-spacing: 1.5px;
+}
+#addEffectField button {
+    font-weight: bold;
+    color: var(--fadedBorder);
+    background-color: transparent;
+    font-size: 150%;
+    margin: 0.25rem 0.15rem;
+    border: 2px solid black;
+    padding: 0.5rem 1.25rem;
+    transition: all 300ms ease;
+}
+#addEffectField button:nth-of-type(1) {
+    border-color: var(--nicePink);
+}
+#addEffectField button:nth-of-type(2) {
+    border-color: var(--niceGreen);
+}
+#addEffectField button:nth-of-type(3) {
+    border-color: var(--niceBlue);
+}
+#addEffectField button:hover {
+    cursor: pointer;
+    color: white;
+}
+#effectCustomizer {
+    display: flex;
+}
+.effect {
+    width: 100%;
+    border: 2px solid black;
+    margin: 0.25rem;
+}
+.customizer {
+    border: 1px solid white;
+    width: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#spellResult {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+}

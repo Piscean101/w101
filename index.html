@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W101 Card Creator</title>
+    <link href="./main.css" rel="stylesheet"/>
+    <script src="./main.js" type="module"></script>
+</head>
+<body>
+
+    <form action="" id="spellForm" class="page">
+        <fieldset id="spellNameField">
+            <legend>Spell Name</legend>
+            <!-- <label for="spellNameInput" class="refresh">Spell Name</label> -->
+            <input type="text" id="spellNameInput" name="name">
+        </fieldset>
+
+        <fieldset id="spellSchoolField">
+            <legend>Spell School and Type</legend>
+
+            <label for="schoolSelect">Primary School</label>
+            <select id="schoolSelect" name="school">
+                <option value="--">--</option>
+                <option value="Fire">Fire</option>
+                <option value="Ice">Ice</option>
+                <option value="Storm">Storm</option>
+                <option value="Life">Life</option>
+                <option value="Death">Death</option>
+                <option value="Myth">Myth</option>
+                <option value="Balance">Balance</option>
+                <option value="Sun">Sun</option>
+                <option value="Moon">Moon</option>
+                <option value="Star">Star</option>
+                <option value="Shadow">Shadow</option>
+            </select>
+
+            <label for="spellTypeInput">Spell Type</label>
+            <select id="spellTypeInput">
+                <option value="AoE">AoE</option>
+                <option value="Charm">Charm</option>
+                <option value="Damage">Damage</option>
+                <option value="Heal">Heal</option>
+                <option value="Manipulation">Manipulation</option>
+                <option value="Ward">Ward</option>
+                <option value="Global">Global</option>
+                <option value="Enchantment">Enchantment</option>
+                <option value="Aura">Aura</option>
+                <option value="Drain">Drain</option>
+            </select>
+
+            <label for="loreCheck" id="loreLabel" title="Lore Spells have increased Damage/Healing but at a lower accuracy">LORE SPELL</label>
+            <input type="checkbox" name="loreCheck" id="loreCheck">
+            
+        </fieldset>
+
+        <fieldset id="spellCostField">
+            <legend>Spell Cost</legend>
+            <label for="spellCostInput">Pip Cost</label>
+            <input id="spellCostInput" type="range" min="0" max="11">
+            <span id="costTempDisplay" class="tempDisplay">0</span>
+            <br><br>
+            <label for="shadowCostInput">Shadow Cost</label>
+            <select id="shadowCostInput" name="shadowCost">
+                <option value="0" checked>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+        </fieldset>
+
+        <!-- <fieldset id="spellTypeField">
+            <legend>Spell Type</legend>
+            <select id="spellTypeInput">
+                <option value="AoE">AoE</option>
+                <option value="Charm">Charm</option>
+                <option value="Damage">Damage</option>
+                <option value="Heal">Heal</option>
+                <option value="Manipulation">Manipulation</option>
+                <option value="Ward">Ward</option>
+                <option value="Global">Global</option>
+                <option value="Enchantment">Enchantment</option>
+                <option value="Aura">Aura</option>
+                <option value="Drain">Drain</option>
+            </select>
+        </fieldset> -->
+
+        <Fieldset id="addEffectField">
+            <legend>Add Effects (max.5)</legend>
+            <div id="effectCustomizer">
+                <fieldset id="chooseAoEField" class="customizer">
+                    <legend class="smol">AoE?</legend>
+                    <label for="chooseAoETrue">Yes</label>
+                    <input type="radio" class="chooseAoE" name="chooseAoE" id="chooseAoETrue" value="true">
+                    <label for="chooseAoEFalse">No</label>
+                    <input type="radio" class="chooseAoE" name="chooseAoE" id="chooseAoEFalse" value="false" checked>
+                </fieldset>
+                <fieldset id="chooseOTField" class="customizer">
+                    <legend class="smol">OverTime?</legend>
+                    <label for="chooseOTTrue">Yes</label>
+                    <input type="radio" class="chooseOT" name="chooseOT" id="chooseOTTrue" value="true">
+                    <label for="chooseOTFalse">No</label>
+                    <input type="radio" class="chooseOT" name="chooseOT" id="chooseOTFalse" value="false" checked>
+                </fieldset>
+                <fieldset id="chooseDiffField" class="customizer">
+                    <legend class="smol">Divergent School?</legend>
+                    <select id="diffSelect" name="diffSelect">
+                        <option value="None">None</option>
+                        <option value="Fire">Fire</option>
+                        <option value="Ice">Ice</option>
+                        <option value="Storm">Storm</option>
+                        <option value="Life">Life</option>
+                        <option value="Death">Death</option>
+                        <option value="Myth">Myth</option>
+                        <option value="Balance">Balance</option>
+                    </select>
+                </fieldset>
+            </div>
+            <button id="addEffectDamage" class="addEffectButton">Add Damage Effect +</button><br>
+            <button id="addEffectHeal" class="addEffectButton">Add Heal Effect +</button><br>
+            <hr>
+            <button id="addEffectSecondary" class="chooseEffectButton">Choose Secondary Effects ></button>
+            <hr>
+            <button id="generateSpell">GENERATE SPELL</button>
+        </Fieldset>
+        
+    </form>
+
+    <div id="spellResult" class="page">
+
+        <div id="spellImage">
+
+            <div id="spellName">Spell Name</div>
+
+            <div id="spellHeader">
+                <div id="spellSchool" class="headerInfo">--</div>
+                <div id="spellCost" class="headerInfo">
+                    <div id="spellCostPip">0 Pips</div>
+                    <br>
+                    <div id="spellCostShadow"></div>
+                </div>
+                <div id="spellAccuracy" class="headerInfo">0%</div>
+                <div id="spellType" class="headerInfo">-</div>
+            </div>
+
+            <div id="spellDesc">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
