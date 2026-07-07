@@ -100,6 +100,13 @@
                     <input type="radio" class="chooseOT" name="chooseOT" id="chooseOTTrue" value="true">
                     <label for="chooseOTFalse">No</label>
                     <input type="radio" class="chooseOT" name="chooseOT" id="chooseOTFalse" value="false" checked>
+                    <label for="chooseOTFalse">Deferred</label>
+                    <input type="radio" class="chooseOT" name="chooseOT" id="chooseOTDef" value="def"><br>
+                    <span id="chooseOTTimeWrap">
+                        <input type="range" class="chooseOT" name="chooseOT" id="chooseOTTime" min="2" max="6" value="3">
+                        <span id="OTTimeTemp">3</span>
+                        Rounds
+                    </span>
                 </fieldset>
                 <fieldset id="chooseDiffField" class="customizer">
                     <legend class="smol">Divergent School?</legend>
@@ -112,6 +119,7 @@
                         <option value="Death">Death</option>
                         <option value="Myth">Myth</option>
                         <option value="Balance">Balance</option>
+                        <option value="Drain">Drain</option>
                     </select>
                 </fieldset>
             </div>

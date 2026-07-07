@@ -1,5 +1,5 @@
 import { schoolData, defaultSchoolProfile } from "./schoolData.js";
-import { createEffect, updateValue } from "./effectEngine.js";
+import { createEffect, convertEffects, updateValue } from "./effectEngine.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -32,6 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const loreCheck = document.getElementById("loreCheck");
 
+    const chooseOTTime = document.getElementById("chooseOTTime");
+    const OTTimeTemp = document.getElementById("OTTimeTemp");
+
+    const generateSpell = document.getElementById("generateSpell");
+
+    chooseOTTime.addEventListener("change", (e) => {
+        updateValue(OTTimeTemp,e.target.value)
+    });
+
     spellNameInput.addEventListener("change", (e) => {
         updateValue(spellNameDisplay,e.target.value);
     });
@@ -60,11 +69,15 @@ document.addEventListener("DOMContentLoaded", () => {
         updateValue(spellTypeDisplay,e.target.value);
     });
 
+    generateSpell.addEventListener("click", (e) => {
+        convertEffects();
+    })
+
     addEffectButtons.forEach((e) => {
         e.addEventListener("click", (f) => {
             createEffect(f.target.id.slice(9).toLowerCase());
         })
-    })
+    });
 
 })
 
