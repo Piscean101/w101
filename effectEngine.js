@@ -33,12 +33,15 @@ export const createEffect = (type='damage') => {
 
     var newEffect = document.createElement("div");
 
-    var [aoeChoice,otChoice,diffChoice] = [
+    var [aoeChoice,otChoice,otTime,diffChoice,damageRange] = [
         [...document.querySelectorAll(".chooseAoE")].filter((e) => { return e.checked == true})[0].value,
         [...document.querySelectorAll(".chooseOT")].filter((e) => { return e.checked == true})[0].value,
-        document.getElementById("diffSelect").value.toLowerCase()];
+        document.getElementById("chooseOTTime").value,
+        document.getElementById("diffSelect").value.toLowerCase(),
+        document.getElementById("chooseDamageRange").value
+    ];
 
-    var metaData = `school:${diffChoice == 'none' ? spellSchoolDisplay.innerHTML.toLowerCase() : diffChoice};type:${type};aoe:${aoeChoice};ot:${otChoice};diff:${diffChoice};weight:${weight}`;
+    var metaData = `school:${diffChoice == 'none' ? spellSchoolDisplay.innerHTML.toLowerCase() : diffChoice};type:${type};aoe:${aoeChoice};ot:${otChoice};time:${otTime};diff:${diffChoice};weight:${weight};range:${damageRange}`;
     var args = metaData.split(";");
 
     const parseArg = (index) => {
@@ -46,16 +49,18 @@ export const createEffect = (type='damage') => {
     }
 
     var effectPreDisplay = [
-        parseArg(4) != 'none' ? parseArg(4) : parseArg(0),
+        parseArg(5) != 'none' ? parseArg(5) : parseArg(0),
         parseArg(1),
+        Number(parseArg(7)) != 0 && parseArg(1) == 'damage' ? `Range: ${parseArg(7)}` : '',
         parseArg(2) != 'false' ? 'aoe' : '',
         parseArg(3) == 'true' ? 'overtime' : parseArg(3) == 'def' ? 'deferred' : '',
-        `WEIGHT: ${parseArg(5)}`
+        `WEIGHT: ${parseArg(6)}`
     ]
 
     effectPreDisplay = effectPreDisplay.filter((e) => { return e != 'none' && e != '' });
 
     newEffect.classList.add("effect",`${type}Effect`,metaData);
+    type == 'damage' || type == 'heal' ? newEffect.classList.add("calcEffect") : null;
     newEffect.innerHTML = effectPreDisplay.join(" ").toUpperCase();
     newEffect.addEventListener("click", (e) => {
         // console.log(parseEffectData(e.target));
@@ -64,50 +69,83 @@ export const createEffect = (type='damage') => {
     })
 
     spellDesc.appendChild(newEffect);
+
 }
 
-export const calcValue = (effect,factor) => {
-    var result = 0;
-    var pp = 0;
+export const calcValue = (effect,factor,count=0) => {
+
+    var [result,pp,calc] = [[],0,0];
     var school = parseEffectData(effect)[1][0];
     school = school.charAt(0).toUpperCase() + school.slice(1);
     var type = parseEffectData(effect)[1][1];
     var aoe = parseEffectData(effect)[1][2];
     var ot = parseEffectData(effect)[1][3];
-    var weight = parseEffectData(effect)[1][5];
+    var otLength = Number(parseEffectData(effect)[1][4]);
+    var weight = Number(parseEffectData(effect)[1][6]);
     var spellValue = Number(spellCostInput.value);
     var shadowValue = Number(shadowCostInput.value);
     spellValue += (spellValue - 1) * 0.13;
-    switch(type) {
+
+    switch(type) {    
         case 'damage':
-            shadowValue != 0 ? pp = schoolData[school].dpp[2] : pp = schoolData[school].dpp[0];
+            shadowValue != 0 ? pp = schoolData[school].dpp[0] : pp = schoolData[school].dpp[0];
             break;
         case 'heal':
-            pp = schoolData[schoo].hpp;
+            pp = schoolData[school].hpp;
             break;
         default: pp = 0;
         break;
     }
+
+    if (ot != 'false') {
+        pp *= (1.1+(otLength*0.05));
+    }
+    
+    calc = Math.ceil((pp * (spellValue + shadowValue*3.6) * factor / 5)) * 5;
+
+    count > 0 ? result.push('and') : null;
+
+    switch (type) {
+        case 'damage':
+            result.push(`${calc} ${school} Damage`);
+            break;
+        case 'heal':
+            result.push(`Heal ${calc}`);
+            break;
+        default: null; break;
+    }
+
+    switch(ot) {
+        case 'true':
+            result.push(`over ${otLength} Rounds`);
+            break;
+        case 'def': 
+            result.push(`after ${otLength} Rounds`);
+            break;
+        default: null; break;
+    }
+
+    if (aoe == 'true') {
+        type == 'damage' ? result.push('to all enemies') : result.push('to all allies');
+        pp *= 0.75;
+    }
+
     school == 'Drain' ? pp = 75 : null;
-    aoe == 'true' ? pp *= 0.75 : null;
-    ot != 'false' ? pp *= 1.25 : null;
-    result = Math.round((pp * (spellValue + shadowValue*3.6) * factor / 5)) * 5;
-    console.log(result);
-    return result;
+    return result.join(' ');
 }
 
 export const convertEffects = () => {
     var resultList = [];
     var currWeight = 0;
     var totalWeight = 0;
-    var effectList = document.querySelectorAll(".effect");
+    var effectList = document.querySelectorAll(".calcEffect");
     effectList.forEach((e) => {
-        currWeight = Number(parseEffectData(e)[1][5]);
+        currWeight = Number(parseEffectData(e)[1][6]);
         totalWeight += currWeight;
     });
-    effectList.forEach((e) => {
-        currWeight = Number(parseEffectData(e)[1][5]);
-        calcValue(e,currWeight/totalWeight);
+    effectList.forEach((e,i) => {
+        currWeight = Number(parseEffectData(e)[1][6]);
+        e.innerHTML = calcValue(e,currWeight/totalWeight,i);
     });
 }
 

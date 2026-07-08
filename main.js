@@ -35,11 +35,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const chooseOTTime = document.getElementById("chooseOTTime");
     const OTTimeTemp = document.getElementById("OTTimeTemp");
 
+    const chooseDamageRange = document.getElementById("chooseDamageRange");
+    const damageRangeTemp = document.getElementById("damageRangeTemp");
+
     const generateSpell = document.getElementById("generateSpell");
 
     chooseOTTime.addEventListener("change", (e) => {
-        updateValue(OTTimeTemp,e.target.value)
+        updateValue(OTTimeTemp,e.target.value);
     });
+
+    // chooseDamageRange.addEventListener("change", (e) => {
+    //     console.log(chooseDamageRange.value)
+    //     updateValue(damageRangeTemp,e.target.value);
+    // })
 
     spellNameInput.addEventListener("change", (e) => {
         updateValue(spellNameDisplay,e.target.value);
