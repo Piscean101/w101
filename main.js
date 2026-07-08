@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     loreCheck.addEventListener("click", (e) => {
-        defaultSchoolProfile(spellSchoolDisplay.innerHTML)
+        defaultSchoolProfile(spellSchoolDisplay.innerHTML);
     })
 
     spellCostInput.addEventListener("change", (e) => {
