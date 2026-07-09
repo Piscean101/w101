@@ -1,10 +1,11 @@
 import { schoolData, defaultSchoolProfile } from "./schoolData.js";
 import { createEffect, convertEffects, updateValue } from "./effectEngine.js";
+import { effectLibrary, displayLibrary } from "./effectLibrary.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
     // ** **//
-
+    displayLibrary(effectLibrary);
     const buttons = document.querySelectorAll("button");
 
     buttons.forEach((e) => { e.addEventListener("click", (f) => { f.preventDefault() })});
@@ -29,6 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const spellTypeInput = document.getElementById("spellTypeInput");
 
     const addEffectButtons = document.querySelectorAll(".addEffectButton");
+    const addEffectSecondaryButton = document.getElementById("addEffectSecondary");
+    const hiddenEffectPanel = document.getElementById("hiddenEffectWrap");
+    const closeHiddenWindow = document.getElementById("closeHiddenWindow");
 
     const loreCheck = document.getElementById("loreCheck");
 
@@ -86,6 +90,14 @@ document.addEventListener("DOMContentLoaded", () => {
             createEffect(f.target.id.slice(9).toLowerCase());
         })
     });
+
+    addEffectSecondaryButton.addEventListener("click", (e) => {
+        hiddenEffectPanel.classList.remove("hidden");
+    });
+
+    closeHiddenWindow.addEventListener("click", (e) => {
+        hiddenEffectPanel.classList.add("hidden");
+    })
 
 })
 

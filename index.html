@@ -9,15 +9,34 @@
 </head>
 <body>
 
+    <div id="hiddenEffectWrap" class="hidden">
+        <button id="closeHiddenWindow">X</button>
+        <div id="singleEffectField" class="hiddenEffectField">
+            <h1 class="hiddenEffectHeader">Single Target Effects</h1>
+            <div class="hiddenEffectLegend">
+                <span class="hiddenEffectLegendName">Name</span>
+                <span class="hiddenEffectLegendDesc">Description</span>
+                <span>Pip Cost</span>
+            </div>
+        </div>
+        <div id="massEffectField" class="hiddenEffectField">
+            <h1 class="HiddenEffectHeader">Mass Target Effects</h1>
+                <div class="hiddenEffectLegend">
+                <span class="hiddenEffectLegendName">Name</span>
+                <span class="hiddenEffectLegendDesc">Description</span>
+                <span>Pip Cost</span>
+            </div>
+        </div>
+    </div>
+
     <form action="" id="spellForm" class="page">
         <fieldset id="spellNameField">
             <legend>Spell Name</legend>
-            <!-- <label for="spellNameInput" class="refresh">Spell Name</label> -->
             <input type="text" id="spellNameInput" name="name">
         </fieldset>
 
         <fieldset id="spellSchoolField">
-            <legend>Spell School and Type</legend>
+            <legend>Spell School</legend>
 
             <label for="schoolSelect">Primary School</label>
             <select id="schoolSelect" name="school">
@@ -69,22 +88,6 @@
             </select>
         </fieldset>
 
-        <!-- <fieldset id="spellTypeField">
-            <legend>Spell Type</legend>
-            <select id="spellTypeInput">
-                <option value="AoE">AoE</option>
-                <option value="Charm">Charm</option>
-                <option value="Damage">Damage</option>
-                <option value="Heal">Heal</option>
-                <option value="Manipulation">Manipulation</option>
-                <option value="Ward">Ward</option>
-                <option value="Global">Global</option>
-                <option value="Enchantment">Enchantment</option>
-                <option value="Aura">Aura</option>
-                <option value="Drain">Drain</option>
-            </select>
-        </fieldset> -->
-
         <Fieldset id="addEffectField">
             <legend>Add Effects (max.5)</legend>
 
@@ -123,10 +126,8 @@
                         <option value="100">100</option>
                         <option value="120">120</option>
                         <option value="140">140</option>
-                        <!-- <option value="150">150</option> -->
                         <option value="200">200</option>
                     </select>
-                    <!-- <span id="damageRangeTemp">0</span> -->
                 </fieldset>
                 <fieldset id="chooseDiffField" class="customizer">
                     <legend class="smol">Divergent School?</legend>
