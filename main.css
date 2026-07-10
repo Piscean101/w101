@@ -44,11 +44,7 @@ input[type="text"] {
     /* position: absolute; */
     width: 80%;
 }
-/* #chooseDiffField {
-    position: absolute;
-    top: 5rem;
-    right: 0;
-} */
+
 #chooseOTTimeWrap {
     position: absolute;
     width: 90%;
@@ -57,26 +53,29 @@ input[type="text"] {
     align-items: center;
     bottom: -0.25rem;
 }
+
 #chooseOTTime {
     width: 80%;
 }
+
 #chooseOTField {
     padding-bottom: 1.25rem;
 }
+
 #OTTimeTemp {
     font-weight: bold;
     padding: 0.25rem;
 }
-/* #damageRangeField {
-    width: 150%;
-} */
+
 .customizer {
     position: relative;
 }
+
 .customizer input {
     width: 1.25rem;
     height: 1.25rem;
 }
+
 #spellImage {
     display: flex;
     justify-content: center;
@@ -85,6 +84,7 @@ input[type="text"] {
     position: relative;
     padding-top: 1.5rem;
 }
+
 #spellImage div {
     display: flex;
     justify-content: center;
@@ -94,25 +94,29 @@ input[type="text"] {
     justify-content: center;
     align-items: center;
 }
+
 #spellImage #spellHeader {
     justify-content: space-between;
 }
-/* #costTempDisplay {
-    border: 1px solid var(--fadedBorder);
-    padding: 0.4rem;
-    font-weight: bold;
-} */
+
+#spellSchoolImg {
+    height: 2rem;
+    aspect-ratio: 1;
+}
+
 #spellName {
     position: absolute;
     top: 0;
     border: 2px solid gold;
     width: 90%;
 }
+
 .tempDisplay {
     border: 1px solid var(--fadedBorder);
     padding: 0.4rem;
     font-weight: bold;
 }
+
 #spellDesc {
     display: flex;
     justify-content: center;
@@ -123,10 +127,12 @@ input[type="text"] {
     max-height: 60vh;
     flex-wrap: wrap;
 }
+
 #loreLabel {
     font-family: Impact;
     letter-spacing: 1.5px;
 }
+
 #addEffectField button {
     font-weight: bold;
     color: var(--fadedBorder);
@@ -137,28 +143,37 @@ input[type="text"] {
     padding: 0.5rem 1.25rem;
     transition: all 300ms ease;
 }
+
 #addEffectField button:nth-of-type(1) {
     border-color: var(--nicePink);
 }
+
 #addEffectField button:nth-of-type(2) {
     border-color: var(--niceGreen);
 }
+
 #addEffectField button:nth-of-type(3) {
     border-color: var(--niceBlue);
 }
+
 #addEffectField button:hover {
     cursor: pointer;
     color: white;
 }
+
 #effectCustomizer {
     display: flex;
     position: relative;
 }
+
 .effect {
     width: 100%;
     border: 2px solid black;
     margin: 0.25rem;
+    z-index: 1000;
+    background-color: transparent;
 }
+
 .customizer {
     border: 1px solid white;
     width: 20%;
@@ -269,7 +284,11 @@ input[type="text"] {
 
 
 
-
+.spellIcon {
+    width: 25px;
+    aspect-ratio: 1;
+    margin: 0rem 0.35rem;
+}
 
 
 

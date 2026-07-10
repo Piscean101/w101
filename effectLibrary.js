@@ -6,7 +6,8 @@ export const effectLibrary = {
         Absorb: {
             name: 'Absorb',
             cost: 3,
-            desc: 'Absorb 400 damage'
+            desc: 'Absorb 400 damage',
+            html: `<img src=./images/iconeffects/Absorb.png> 400 <img src=./images/iconeffects/Damage.png>`
         },
         Weakness: {
             name: 'Weakness',
@@ -26,9 +27,9 @@ export const effectLibrary = {
             desc: '-20% next outgoing hit to all enemies'
         }
     }
-}
+};
 
-export const createSecondaryEffect = (name,desc,cost,type) => {
+export const createSecondaryEffectSelect = (name,desc,cost,type) => {
     const newSecondary = document.createElement("div");
     const newName = document.createElement("span");
     const newDesc = document.createElement("span");
@@ -48,9 +49,9 @@ export const createSecondaryEffect = (name,desc,cost,type) => {
 
 export const displayLibrary = (lib) => {
     for (const [key,val] of Object.entries(lib['Single'])) {
-        createSecondaryEffect(val.name,val.desc,val.cost,'Single');
+        createSecondaryEffectSelect(val.name,val.desc,val.cost,'Single');
     }
     for (const [key,val] of Object.entries(lib['Mass'])) {
-        createSecondaryEffect(val.name,val.desc,val.cost,'Mass');
+        createSecondaryEffectSelect(val.name,val.desc,val.cost,'Mass');
     }
-}
+};

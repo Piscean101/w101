@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const spellSchoolDisplay = document.getElementById("spellSchool");
     const spellSchoolInput = document.getElementById("schoolSelect");
+    const spellSchoolImg = document.getElementById("spellSchoolImg");
 
     const spellCostDisplay = document.getElementById("spellCostPip");
     const spellCostInput = document.getElementById("spellCostInput");
@@ -33,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const addEffectSecondaryButton = document.getElementById("addEffectSecondary");
     const hiddenEffectPanel = document.getElementById("hiddenEffectWrap");
     const closeHiddenWindow = document.getElementById("closeHiddenWindow");
+    const secondaryEffectSelect = document.querySelectorAll(".secondaryEffectSelect");
+
+    console.log(secondaryEffectSelect);
 
     const loreCheck = document.getElementById("loreCheck");
 
@@ -48,42 +52,45 @@ document.addEventListener("DOMContentLoaded", () => {
         updateValue(OTTimeTemp,e.target.value);
     });
 
-    // chooseDamageRange.addEventListener("change", (e) => {
-    //     console.log(chooseDamageRange.value)
-    //     updateValue(damageRangeTemp,e.target.value);
-    // })
-
     spellNameInput.addEventListener("change", (e) => {
         updateValue(spellNameDisplay,e.target.value);
     });
 
     spellSchoolInput.addEventListener("change", (e) => {
-        defaultSchoolProfile(e.target.value)
-        updateValue(spellSchoolDisplay,e.target.value);
+        defaultSchoolProfile(e.target.value);
+        localStorage.setItem("school",e.target.value);
+        spellSchoolImg.classList.remove("hidden");
+        var schoolIcon = `${e.target.value}.png`;
+        e.target.value == '--' ? schoolIcon = 'loading.png' : null;
+        var icon = `./images/iconSchool/${schoolIcon}`;
+        spellSchoolImg.src = icon;
     });
 
     loreCheck.addEventListener("click", (e) => {
         defaultSchoolProfile(spellSchoolDisplay.innerHTML);
-    })
+    });
 
     spellCostInput.addEventListener("change", (e) => {
         updateValue(costTempDisplay,e.target.value);
-        Number(e.target.value == 1) ? updateValue(spellCostDisplay,`${e.target.value} Pip`) : updateValue(spellCostDisplay,`${e.target.value} Pips`)
+        Number(e.target.value == 1) ? updateValue(spellCostDisplay,`${e.target.value} <img src=./images/iconpips/Pip.png>`) : updateValue(spellCostDisplay,`${e.target.value} <img src=./images/iconpips/Pip.png>`)
     });
 
     shadowCostInput.addEventListener("change", (e) => {
         Number(e.target.value) == 0 ? updateValue(spellCostShadowDisplay,''): 
-        Number(e.target.value) == 1? updateValue(spellCostShadowDisplay,`${e.target.value} Shadow Pip`) : 
-        updateValue(spellCostShadowDisplay,`${e.target.value} Shadow Pips`) ;
+        Number(e.target.value) == 1? updateValue(spellCostShadowDisplay,`${e.target.value} <img src=./images/iconpips/Pip_Shadow.png>`) : 
+        updateValue(spellCostShadowDisplay,`${e.target.value} <img src=./images/iconpips/Pip_Shadow.png>`) ;
     });
 
     spellTypeInput.addEventListener("change", (e) => {
-        updateValue(spellTypeDisplay,e.target.value);
+        // e.target.value == 'false' ? updateValue(spellTypeDisplay,'--') : updateValue(spellTypeDisplay,e.target.value);
+        if (e.target.value == 'false') { return } else {
+            spellTypeDisplay.src = `./images/iconschool/${e.target.value}.png`;
+        }
     });
 
     generateSpell.addEventListener("click", (e) => {
         convertEffects();
-    })
+    });
 
     addEffectButtons.forEach((e) => {
         e.addEventListener("click", (f) => {
@@ -91,13 +98,21 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     });
 
+    secondaryEffectSelect.forEach((e) => {
+        e.addEventListener("click", (f) => {
+            console.log('test')
+            createEffect('secondary');
+            hiddenEffectPanel.classList.add('hidden');
+        })
+    })
+
     addEffectSecondaryButton.addEventListener("click", (e) => {
         hiddenEffectPanel.classList.remove("hidden");
     });
 
     closeHiddenWindow.addEventListener("click", (e) => {
         hiddenEffectPanel.classList.add("hidden");
-    })
+    });
 
-})
+});
 
