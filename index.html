@@ -31,8 +31,19 @@
 
     <form action="" id="spellForm" class="page">
         <fieldset id="spellNameField">
-            <legend>Spell Name</legend>
+            <legend>Spell Name & Cost</legend>
             <input type="text" id="spellNameInput" name="name">
+
+            <label for="spellCostInput">Pip Cost</label>
+            <input id="spellCostInput" type="range" min="0" max="11" value="4">
+            <span id="costTempDisplay" class="tempDisplay">4</span>
+            <br><br>
+            <label for="shadowCostInput">Shadow Cost</label>
+            <select id="shadowCostInput" name="shadowCost">
+                <option value="0" checked>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
         </fieldset>
 
         <fieldset id="spellSchoolField">
@@ -58,15 +69,16 @@
             <select id="spellTypeInput">
                 <option value="false">--</option>
                 <option value="Aoe">AoE</option>
+                <option value="Aura">Aura</option>
                 <option value="Charm">Charm</option>
                 <option value="Damage">Damage</option>
+                <option value="Drain">Drain</option>
+                <option value="Enchantment">Enchantment</option>
+                <option value="Global">Global</option>
                 <option value="Heal">Heal</option>
                 <option value="Manipulation">Manipulation</option>
                 <option value="Ward">Ward</option>
-                <option value="Global">Global</option>
-                <option value="Enchantment">Enchantment</option>
-                <option value="Aura">Aura</option>
-                <option value="Drain">Drain</option>
+                <option value="Weakness">Weakness</option>
             </select>
 
             <label for="loreCheck" id="loreLabel" title="Lore Spells have increased Damage/Healing but at a lower accuracy">LORE SPELL</label>
@@ -74,7 +86,7 @@
             
         </fieldset>
 
-        <fieldset id="spellCostField">
+        <!-- <fieldset id="spellCostField">
             <legend>Spell Cost</legend>
             <label for="spellCostInput">Pip Cost</label>
             <input id="spellCostInput" type="range" min="0" max="11" value="0">
@@ -86,7 +98,7 @@
                 <option value="1">1</option>
                 <option value="2">2</option>
             </select>
-        </fieldset>
+        </fieldset> -->
 
         <Fieldset id="addEffectField">
             <legend>Add Effects (max.5)</legend>
@@ -158,6 +170,8 @@
             <hr>
             <button id="addEffectSecondary" class="chooseEffectButton">Choose Secondary Effects ></button>
             <hr>
+            <button id="refreshSpell">REFRESH</button>
+            <hr>
             <button id="generateSpell">GENERATE SPELL</button>
 
         </Fieldset>
@@ -174,7 +188,7 @@
                 <!-- <div id="spellSchool" class="headerInfo">--</div> -->
                 <img id="spellSchoolImg" class="hidden"/>
                 <div id="spellCost" class="headerInfo">
-                    <div id="spellCostPip">0 Pips</div>
+                    <div id="spellCostPip">4 Pips</div>
                     <br>
                     <div id="spellCostShadow"></div>
                 </div>

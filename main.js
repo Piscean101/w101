@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const spellSchoolDisplay = document.getElementById("spellSchool");
     const spellSchoolInput = document.getElementById("schoolSelect");
     const spellSchoolImg = document.getElementById("spellSchoolImg");
+    const schoolName = spellSchoolImg.src.split('/').pop().split('.').shift();
 
     const spellCostDisplay = document.getElementById("spellCostPip");
     const spellCostInput = document.getElementById("spellCostInput");
@@ -44,7 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const chooseDamageRange = document.getElementById("chooseDamageRange");
     const damageRangeTemp = document.getElementById("damageRangeTemp");
 
-    const generateSpell = document.getElementById("generateSpell");
+    const refreshSpellButton = document.getElementById("refreshSpell");
+
+    const generateSpellButton = document.getElementById("generateSpell");
 
     chooseOTTime.addEventListener("change", (e) => {
         updateValue(OTTimeTemp,e.target.value);
@@ -86,7 +89,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    generateSpell.addEventListener("click", (e) => {
+    refreshSpellButton.addEventListener("click", (e) => {
+        var refreshChoice = confirm("Would you like to remove all active effects?");
+        if (!refreshChoice) {
+            return
+        } else {
+            var effectList = document.querySelectorAll(".effect");
+            effectList.forEach((e) => { e.remove() });
+        }
+    });
+
+    generateSpellButton.addEventListener("click", (e) => {
         convertEffects();
     });
 
@@ -110,9 +123,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 hiddenEffectPanel.classList.add('hidden');
             }
         })
-    })
+    });
 
     addEffectSecondaryButton.addEventListener("click", (e) => {
+        if (spellSchoolImg.classList.contains("hidden") || schoolName == 'loading') { return alert('Please choose a primary school for your spell to continue') };
         hiddenEffectPanel.classList.remove("hidden");
     });
 

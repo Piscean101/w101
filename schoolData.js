@@ -4,6 +4,7 @@ const spellAccuracyDisplay = document.getElementById("spellAccuracy");
 const loreCheck = document.getElementById("loreCheck");
 
 export const schoolData = {
+    // ** MISSING : ASTRAL ELEMENTAL AND SPIRIT DATA **//
     Fire: {
         name: 'Fire',
         dpp: [100,110,125],

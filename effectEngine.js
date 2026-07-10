@@ -21,24 +21,28 @@ export const createEffect = (type='damage',secondaryData=['','',0],singleTarget=
 
     /** QUALITY ASSURANCE */
     var schoolName = spellSchoolImg.src.split('/').pop().split('.').shift();
+    var [aoeChoice,otChoice,otTime,diffChoice,damageRange] = [
+        [...document.querySelectorAll(".chooseAoE")].filter((e) => { return e.checked == true})[0].value,
+        [...document.querySelectorAll(".chooseOT")].filter((e) => { return e.checked == true})[0].value,
+        document.getElementById("chooseOTTime").value,
+        document.getElementById("diffSelect").value.toLowerCase(),
+        document.getElementById("chooseDamageRange").value
+    ];
+    if (spellSchoolImg.classList.contains("hidden") || schoolName == 'loading') { return alert('Please choose a primary school for your spell to continue') };
 
-    if (spellSchoolImg.classList.contains("hidden") || schoolName == 'loading') {
-        return alert('Please choose a primary school for your spell to continue');
-    }
-
-    if (countEffects() >= 5) {
-        return alert(`Max Effect Count Reached!\n\nSelect an existing effect to remove it`);
-    }
+    if (countEffects() >= 5) { return alert(`Max Effect Count Reached!\n\nSelect an existing effect to remove it`) };
+    if (type == 'heal' && otChoice == 'def') { return }
     /**   */
 
     var newEffect = document.createElement("div"); 
 
     if (type == 'secondary') {
         newEffect.classList.add("effect","secondaryEffect");
+        var secondaryName = secondaryData[0].replace(" ","");
         if (singleTarget) {
-            newEffect.classList.add("Single",secondaryData[0]);
+            newEffect.classList.add("Single",secondaryName);
         } else {
-            newEffect.classList.add("Mass",secondaryData[0]);
+            newEffect.classList.add("Mass",secondaryName);
         }
         newEffect.innerHTML = secondaryData[0];
 
@@ -49,14 +53,6 @@ export const createEffect = (type='damage',secondaryData=['','',0],singleTarget=
         Number(weight) >= 20 ? weight = 20 : null;
     
         if(!weight || Number(weight) < 1 || isNaN(Number(weight))) { return alert(`Damage / Heal effects must include a number rating of 1-20. This rating determines the relative potency of each effect\n\nPlease try again`) }
-        
-        var [aoeChoice,otChoice,otTime,diffChoice,damageRange] = [
-            [...document.querySelectorAll(".chooseAoE")].filter((e) => { return e.checked == true})[0].value,
-            [...document.querySelectorAll(".chooseOT")].filter((e) => { return e.checked == true})[0].value,
-            document.getElementById("chooseOTTime").value,
-            document.getElementById("diffSelect").value.toLowerCase(),
-            document.getElementById("chooseDamageRange").value
-        ];
     
         var metaData = `school:${diffChoice == 'none' ? schoolSelect.value : diffChoice};type:${type};aoe:${aoeChoice};ot:${otChoice};time:${otTime};diff:${diffChoice};weight:${weight};range:${damageRange}`;
         var args = metaData.split(";");
@@ -112,6 +108,7 @@ export const calcValue = (effect,factor,count=0,checkOT=false,effectTax=0) => {
     
     const adjustTax = () => {
         spellValue >= 8 ? effectTax *= 0.5 : null;
+        console.log(effectTax);
         spellValue -= effectTax;
         spellValue += (spellValue - 1) * 0.13;
     }
@@ -146,6 +143,8 @@ export const calcValue = (effect,factor,count=0,checkOT=false,effectTax=0) => {
     if (aoe == 'true') {
         pp *= 0.75;
     }
+
+    /** ASSUME VALUE OF SCHOOL PIPS IS 2.6 */
     
     calc = Math.ceil((pp * (spellValue + shadowValue*3.6) * factor / 5)) * 5;
 
