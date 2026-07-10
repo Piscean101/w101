@@ -36,8 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeHiddenWindow = document.getElementById("closeHiddenWindow");
     const secondaryEffectSelect = document.querySelectorAll(".secondaryEffectSelect");
 
-    console.log(secondaryEffectSelect);
-
     const loreCheck = document.getElementById("loreCheck");
 
     const chooseOTTime = document.getElementById("chooseOTTime");
@@ -100,9 +98,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     secondaryEffectSelect.forEach((e) => {
         e.addEventListener("click", (f) => {
-            console.log('test')
-            createEffect('secondary');
-            hiddenEffectPanel.classList.add('hidden');
+            if (!f.target.classList.contains("secondaryEffectSelect")) {
+                return 
+            } else {
+                var c = f.target.children;
+                if (f.target.classList.contains("singleTarget")) {
+                    createEffect('secondary',[c[0].innerHTML,c[1].innerHTML,Number(c[2].innerHTML)]);
+                } else {
+                    createEffect('secondary',[c[0].innerHTML,c[1].innerHTML,Number(c[2].innerHTML)],false);
+                }
+                hiddenEffectPanel.classList.add('hidden');
+            }
         })
     })
 

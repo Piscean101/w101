@@ -7,7 +7,7 @@ export const effectLibrary = {
             name: 'Absorb',
             cost: 3,
             desc: 'Absorb 400 damage',
-            html: `<img src=./images/iconeffects/Absorb.png> 400 <img src=./images/iconeffects/Damage.png>`
+            html: `<img src="./images/iconeffects/Absorb.png" class="spellIcon"/> 400 <img src="./images/iconeffects/Damage.png" class="spellIcon"/>`
         },
         Weakness: {
             name: 'Weakness',
@@ -44,7 +44,13 @@ export const createSecondaryEffectSelect = (name,desc,cost,type) => {
     newSecondary.appendChild(newName);
     newSecondary.appendChild(newDesc);
     newSecondary.appendChild(newCost);
-    type == 'Single' ? singleEffectField.appendChild(newSecondary) : massEffectField.appendChild(newSecondary);
+    if  (type == 'Single') {
+        newSecondary.classList.add("singleTarget");
+        singleEffectField.appendChild(newSecondary)
+    } else {
+        newSecondary.classList.add("massTarget");
+        massEffectField.appendChild(newSecondary);
+    }
 }
 
 export const displayLibrary = (lib) => {

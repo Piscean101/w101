@@ -17,9 +17,9 @@ const countEffects = () => {
     return result;
 };
 
-export const createEffect = (type='damage') => { 
+export const createEffect = (type='damage',secondaryData=['','',0],singleTarget=true) => { 
 
-    /** QUALITY CHECK */
+    /** QUALITY ASSURANCE */
     var schoolName = spellSchoolImg.src.split('/').pop().split('.').shift();
 
     if (spellSchoolImg.classList.contains("hidden") || schoolName == 'loading') {
@@ -29,21 +29,26 @@ export const createEffect = (type='damage') => {
     if (countEffects() >= 5) {
         return alert(`Max Effect Count Reached!\n\nSelect an existing effect to remove it`);
     }
-
-    var weight = prompt("Enter a weight of 1-20");
-    
-    Number(weight) >= 20 ? weight = 20 : null;
-    
-    if(!weight || Number(weight) < 1 || isNaN(Number(weight))) { return alert(`Damage / Heal effects must include a number rating of 1-20. This rating determines the relative potency of each effect\n\nPlease try again`) }
     /**   */
-
 
     var newEffect = document.createElement("div"); 
 
     if (type == 'secondary') {
-
+        newEffect.classList.add("effect","secondaryEffect");
+        if (singleTarget) {
+            newEffect.classList.add("Single",secondaryData[0]);
+        } else {
+            newEffect.classList.add("Mass",secondaryData[0]);
+        }
+        newEffect.innerHTML = secondaryData[0];
 
     } else {
+
+        var weight = prompt("Enter a weight of 1-20");
+    
+        Number(weight) >= 20 ? weight = 20 : null;
+    
+        if(!weight || Number(weight) < 1 || isNaN(Number(weight))) { return alert(`Damage / Heal effects must include a number rating of 1-20. This rating determines the relative potency of each effect\n\nPlease try again`) }
         
         var [aoeChoice,otChoice,otTime,diffChoice,damageRange] = [
             [...document.querySelectorAll(".chooseAoE")].filter((e) => { return e.checked == true})[0].value,
@@ -74,23 +79,22 @@ export const createEffect = (type='damage') => {
         type == 'damage' || type == 'heal' ? newEffect.classList.add("calcEffect") : null;
 
         newEffect.innerHTML = effectPreDisplay.join(" ").toUpperCase();
+        
+    };
+    
+    newEffect.addEventListener("click", (e) => {
 
-        newEffect.addEventListener("click", (e) => {
+        if (!e.target.classList.contains("effect")) { return };
+        var choice = confirm("Are you sure you want to remove this effect from your spell?");
+        choice ? e.target.remove() : null;
 
-            if (!e.target.classList.contains("effect")) { return }
-            var choice = confirm("Are you sure you want to remove this effect from your spell?");
-            choice ? e.target.remove() : null;
-
-        });
-
-    }
+    });
 
     spellDesc.appendChild(newEffect);
 
 };
 
-export const calcValue = (effect,factor,count=0,checkOT=false) => {
-
+export const calcValue = (effect,factor,count=0,checkOT=false,effectTax=0) => {
     var [result,pp,calc,min,max] = [[],0,0,0,0];
     var school = parseEffectData(effect)[1][0];
     school = school.charAt(0).toUpperCase() + school.slice(1);
@@ -105,8 +109,15 @@ export const calcValue = (effect,factor,count=0,checkOT=false) => {
     var schoolIcon = new Image();
     schoolIcon.src = `./images/iconeffects/${school}.png`;
     schoolIcon.classList.add("schoolIcon","spellIcon");
-    spellValue += (spellValue - 1) * 0.13;
+    
+    const adjustTax = () => {
+        spellValue >= 8 ? effectTax *= 0.5 : null;
+        spellValue -= effectTax;
+        spellValue += (spellValue - 1) * 0.13;
+    }
 
+    adjustTax();
+    
     if (school == 'Drain') { 
 
         loreCheck.checked ? pp = 85 : pp = 75;
@@ -173,12 +184,26 @@ export const calcValue = (effect,factor,count=0,checkOT=false) => {
     return result.join(' ');
 };
 
-export const convertEffects = () => {
+export const calcEffectTax = () => {
+
+    var result = 0;
+    var secondaryEffectList = document.querySelectorAll(".secondaryEffect");
+    secondaryEffectList.forEach((e) => {
+        var name = e.classList[3].replace(" ","");
+        result += Number(effectLibrary[e.classList[2]][name].cost);
+    });
+    secondaryEffectList.length > 0 ? result += 1 : null;
+    return result;
+
+};
+
+export const convertEffects = (effectTax = calcEffectTax()) => {
     var resultList = [];
     var currWeight = 0;
     var totalWeight = 0;
     var checkOT = false;
     var effectList = document.querySelectorAll(".calcEffect");
+    var secondaryEffectList = document.querySelectorAll(".secondaryEffect");
     effectList.forEach((e) => {
         currWeight = Number(parseEffectData(e)[1][6]);
         totalWeight += currWeight;
@@ -188,8 +213,18 @@ export const convertEffects = () => {
     });
     effectList.forEach((e,i) => {
         currWeight = Number(parseEffectData(e)[1][6]);
-        e.innerHTML = calcValue(e,currWeight/totalWeight,i,checkOT);
+        e.innerHTML = calcValue(e,currWeight/totalWeight,i,checkOT,effectTax);
     });
+    secondaryEffectList.forEach((e) => {
+        var secondaryEffectDisplay = '';
+        var name = e.classList[3].replace(" ","");
+        if(e.classList.contains("Single")) {
+            secondaryEffectDisplay = effectLibrary['Single'][name].html;
+        } else {
+            secondaryEffectDisplay = effectLibrary['Mass'][name].html;
+        }
+        e.innerHTML = secondaryEffectDisplay;
+    })
 };
 
 export const parseEffectData = (effect) => {
