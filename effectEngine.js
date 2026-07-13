@@ -12,6 +12,8 @@ const shadowCostInput = document.getElementById("shadowCostInput");
 const spellCostShadowDisplay = document.getElementById("spellCostShadow");
 const loreCheck = document.getElementById("loreCheck");
 
+const chooseDamageRange = document.getElementById("chooseDamageRange");
+
 const countEffects = () => {
     var result = document.querySelectorAll('.effect').length;
     return result;
@@ -103,14 +105,16 @@ export const calcValue = (effect,factor,count=0,checkOT=false,effectTax=0) => {
     var spellValue = Number(spellCostInput.value);
     var shadowValue = Number(shadowCostInput.value);
     var schoolIcon = new Image();
-    schoolIcon.src = `./images/iconeffects/${school}.png`;
     schoolIcon.classList.add("schoolIcon","spellIcon");
+
     
     const adjustTax = () => {
-        spellValue >= 8 ? effectTax *= 0.5 : null;
-        console.log(effectTax);
-        spellValue -= effectTax;
         spellValue += (spellValue - 1) * 0.13;
+        spellValue >= 8 ? effectTax *= 0.5 : null;
+        spellValue -= effectTax;
+        if (localStorage.getItem("schoolpip")) {
+            spellValue += 3.6 ;
+        }
     }
 
     adjustTax();
@@ -123,7 +127,9 @@ export const calcValue = (effect,factor,count=0,checkOT=false,effectTax=0) => {
         
         switch(type) {    
             case 'damage':
-                loreCheck.checked ? pp = schoolData[school].dpp[1] : pp = schoolData[school].dpp[0];
+                loreCheck.checked ? pp = schoolData[school].dpp[1] : 
+                Number(shadowValue) > 0 ? pp = schoolData[school].dpp[2] : 
+                pp = schoolData[school].dpp[0];
                 break;
             case 'heal':
                 pp = schoolData[school].hpp;
@@ -144,9 +150,11 @@ export const calcValue = (effect,factor,count=0,checkOT=false,effectTax=0) => {
         pp *= 0.75;
     }
 
+    // console.log(pp, spellValue, shadowValue, factor);
+
     /** ASSUME VALUE OF SCHOOL PIPS IS 2.6 */
     
-    calc = Math.ceil((pp * (spellValue + shadowValue*3.6) * factor / 5)) * 5;
+    calc = Math.floor((pp * (spellValue + shadowValue*3.6) * factor / 5)) * 5;
 
     min = Math.round(calc - range/2);
     max = Math.round(calc + range/2);
@@ -155,7 +163,28 @@ export const calcValue = (effect,factor,count=0,checkOT=false,effectTax=0) => {
 
     switch (type) {
         case 'damage':
-            range > 0 && ot != 'true' ? result.push(`${min} - ${max} <img src='${schoolIcon.src}' class='spellIcon'/>`) : result.push(`${calc} <img src='${schoolIcon.src}' class='spellIcon'/>`);
+            range > 0 && ot != 'true' ? result.push(`${min} - ${max}`) : result.push(`${calc}`);
+            switch (school) {
+                case 'Sun':
+                    result.push(`<img src='./images/iconschool/Myth.png' class='spellIcon'/>, <img src='./images/iconschool/Life.png' class='spellIcon'/> or <img src='./images/iconschool/Fire.png' class='spellIcon'/>`);
+                    break;
+                case 'Moon':
+                    result.push(`<img src='./images/iconschool/Ice.png' class='spellIcon'/>, <img src='./images/iconschool/Death.png' class='spellIcon'/> or <img src='./images/iconschool/Myth.png' class='spellIcon'/>`);
+                    break;
+                case 'Star':
+                    result.push(`<img src='./images/iconschool/Life.png' class='spellIcon'/>, <img src='./images/iconschool/Storm.png' class='spellIcon'/> or <img src='./images/iconschool/Death.png' class='spellIcon'/>`);
+                    break;
+                case 'Elemental':
+                    result.push(`<img src='./images/iconschool/Fire.png' class='spellIcon'/>, <img src='./images/iconschool/Ice.png' class='spellIcon'/> or <img src='./images/iconschool/Storm.png' class='spellIcon'/>`);
+                    break;
+                case 'Spirit':
+                    result.push(`<img src='./images/iconschool/Life.png' class='spellIcon'/>, <img src='./images/iconschool/Myth.png' class='spellIcon'/> or <img src='./images/iconschool/Death.png' class='spellIcon'/>`);
+                    break;
+                default: 
+                    schoolIcon.src = `./images/iconeffects/${school}.png`;
+                    result.push(`<img src='${schoolIcon.src}' class='spellIcon'/>`);
+                break;
+            }
             result.push(`<img src='./images/iconeffects/Damage.png' class="spellIcon"/>`);
             break;
         case 'heal':
@@ -223,7 +252,7 @@ export const convertEffects = (effectTax = calcEffectTax()) => {
             secondaryEffectDisplay = effectLibrary['Mass'][name].html;
         }
         e.innerHTML = secondaryEffectDisplay;
-    })
+    });
 };
 
 export const parseEffectData = (effect) => {

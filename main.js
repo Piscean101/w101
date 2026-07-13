@@ -5,6 +5,7 @@ import { effectLibrary, displayLibrary } from "./effectLibrary.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     // ** **//
+    localStorage.removeItem("schoolpip")
     displayLibrary(effectLibrary);
     const buttons = document.querySelectorAll("button");
 
@@ -25,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const costTempDisplay = document.getElementById("costTempDisplay");
     const shadowCostInput = document.getElementById("shadowCostInput");
     const spellCostShadowDisplay = document.getElementById("spellCostShadow");
+    const spellCostSchoolPip = document.getElementById("spellCostSchoolPip");
+    const schoolPipInput = document.getElementById("schoolPipInput");
 
     const spellAccuracyDisplay = document.getElementById("spellAccuracy");
 
@@ -66,6 +69,17 @@ document.addEventListener("DOMContentLoaded", () => {
         var icon = `./images/iconSchool/${schoolIcon}`;
         spellSchoolImg.src = icon;
     });
+
+    schoolPipInput.addEventListener("change", (e) => {
+        if (e.target.value == 'none') {
+            spellCostSchoolPip.classList.add("hidden");
+            localStorage.removeItem("schoolpip");
+        } else {
+            localStorage.setItem("schoolpip",e.target.value);
+            spellCostSchoolPip.classList.contains("hidden") ? spellCostSchoolPip.classList.remove("hidden") : null;
+            spellCostSchoolPip.src = `./images/iconpips/${e.target.value}.png`;
+        }
+    })
 
     loreCheck.addEventListener("click", (e) => {
         defaultSchoolProfile(spellSchoolDisplay.innerHTML);

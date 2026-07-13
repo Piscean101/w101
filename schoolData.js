@@ -1,4 +1,5 @@
 import { updateValue } from "./effectEngine.js";
+import { effectLibrary } from "./effectLibrary.js";
 
 const spellAccuracyDisplay = document.getElementById("spellAccuracy");
 const loreCheck = document.getElementById("loreCheck");
@@ -47,6 +48,37 @@ export const schoolData = {
         acc: 80,
         hpp: 125
     },
+
+    //**  **/?
+
+    Elemental: {
+        name: 'Elemental',
+        /* Fire Ice Storm */
+        dpp: [((100 + 83 + 125) / 3)]
+    },
+    Spirit: {
+        name: 'Spirit',
+        /* Life Death Myth */
+        dpp: [((83 + 85 + 90) / 3)]
+    },
+
+    // ** ** //
+
+    Sun: {
+        name: 'Sun',
+        /* Myth Life Fire */
+        dpp: [((90 + 83 + 100) / 3)]
+    },
+    Moon: {
+        name: 'Moon',
+        /* Ice Death Myth */
+        dpp: [((83 + 85 + 90) / 3)]
+    },
+    Star: {
+        name: 'Star',
+        /* Life Storm Death */
+        dpp: [((83 + 125 + 85) / 3)]
+    }
 };
 
 export const defaultSchoolProfile = (school) => {

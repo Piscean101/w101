@@ -117,11 +117,12 @@ input[type="text"] {
     font-weight: bold;
 }
 
-#spellNameField {
+/* #spellNameField {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
+    flex-wrap: wrap;
+} */
 
 #spellDesc {
     display: flex;
@@ -143,7 +144,7 @@ input[type="text"] {
     font-weight: bold;
     color: var(--fadedBorder);
     background-color: transparent;
-    font-size: 150%;
+    font-size: 120%;
     margin: 0.75rem 0.15rem;
     border: 2px solid black;
     padding: 0.5rem 1.25rem;
@@ -162,14 +163,41 @@ input[type="text"] {
     border-color: var(--niceBlue);
 }
 
+#addEffectField button {
+    margin: 1rem;
+    font-family: 'Segoe UI'
+}
+
 #addEffectField button:hover {
     cursor: pointer;
     color: white;
 }
 
-#effectCustomizer {
-    display: flex;
+#effectCustomizer #generateSpell {
     position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 200%;
+}
+
+#effectCustomizer {
+    /* display: flex; */
+    position: relative;
+}
+
+#customizerTopRow {
+    /* border: 2px solid purple; */
+    display: flex;
+}
+
+#customizerMiddleRow {
+    display: flex;
+    /* border: 2px solid orange; */
+}
+
+#customizerBottomRow {
+    /* border: 2px solid blue; */
+    display: flex;
 }
 
 .effect {
@@ -288,7 +316,9 @@ input[type="text"] {
 
 
 
-
+.bigUIbtn {
+    font-size: 90%;
+}
 
 .spellIcon {
     width: 25px;
