@@ -104,14 +104,17 @@ export const calcValue = (effect,factor,count=0,checkOT=false,effectTax=0) => {
     var range = Number(parseEffectData(effect)[1][7]);
     var spellValue = Number(spellCostInput.value);
     var shadowValue = Number(shadowCostInput.value);
+    var exemptAoe = document.getElementById("exemptaoe").checked;
+    var exemptWeight = document.getElementById("exemptweight").checked;
+    var exemptTax = document.getElementById("exempteffect").checked;
     var schoolIcon = new Image();
     schoolIcon.classList.add("schoolIcon","spellIcon");
-
     
     const adjustTax = () => {
-        spellValue += (spellValue - 1) * 0.13;
         spellValue >= 8 ? effectTax *= 0.5 : null;
+        exemptTax ? effectTax = 0 : null;
         spellValue -= effectTax;
+        spellValue += (spellValue - 1) * 0.13;
         if (localStorage.getItem("schoolpip")) {
             spellValue += 3.6 ;
         }
@@ -147,19 +150,21 @@ export const calcValue = (effect,factor,count=0,checkOT=false,effectTax=0) => {
     }
 
     if (aoe == 'true') {
-        pp *= 0.75;
+        exemptAoe ? null : pp *= 0.75;
     }
 
     // console.log(pp, spellValue, shadowValue, factor);
 
     /** ASSUME VALUE OF SCHOOL PIPS IS 2.6 */
     
-    calc = Math.floor((pp * (spellValue + shadowValue*3.6) * factor / 5)) * 5;
+    calc = Math.ceil((pp * (spellValue + shadowValue*3.6) * factor / 5)) * 5;
 
     min = Math.round(calc - range/2);
     max = Math.round(calc + range/2);
 
-    count > 0 ? result.push('and') : null;
+    if (count > 0) {
+        exemptWeight ? result.push("or") : result.push("and"); 
+    }
 
     switch (type) {
         case 'damage':
@@ -232,6 +237,7 @@ export const convertEffects = (effectTax = calcEffectTax()) => {
     var checkOT = false;
     var effectList = document.querySelectorAll(".calcEffect");
     var secondaryEffectList = document.querySelectorAll(".secondaryEffect");
+    var exemptWeight = document.getElementById("exemptweight").checked;
     effectList.forEach((e) => {
         currWeight = Number(parseEffectData(e)[1][6]);
         totalWeight += currWeight;
@@ -241,7 +247,7 @@ export const convertEffects = (effectTax = calcEffectTax()) => {
     });
     effectList.forEach((e,i) => {
         currWeight = Number(parseEffectData(e)[1][6]);
-        e.innerHTML = calcValue(e,currWeight/totalWeight,i,checkOT,effectTax);
+        e.innerHTML = exemptWeight ? calcValue(e,1,i,checkOT,effectTax) : calcValue(e,currWeight/totalWeight,i,checkOT,effectTax);
     });
     secondaryEffectList.forEach((e) => {
         var secondaryEffectDisplay = '';

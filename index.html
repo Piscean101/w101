@@ -10,10 +10,6 @@
 <body>
 
     <!--
-    school pips
-    multi school
-    no-aoe-tax
-    no-weight-tax
     effect lib
 -->
 
@@ -170,8 +166,6 @@
 
                 <div id="customizerMiddleRow">
 
-
-                    
                     <fieldset id="chooseDiffField" class="customizer">
                         <legend class="smol">Divergent School?</legend>
                         <select id="diffSelect" name="diffSelect">
@@ -195,6 +189,19 @@
                         </select>
     
                     </fieldset>
+
+
+                    <fieldset id="chooseExemption" class="customizer">
+                        <legend class="smol">Ignore a modifier?</legend>
+                        <label for="exemptaoe">AoE</label>
+                        <input type="checkbox" id="exemptaoe" class="exemption">
+                        <label for="exemptaoe">Weight</label>
+                        <input type="checkbox" id="exemptweight" class="exemption">
+                        <label for="exempteffect">Secondary Effects</label>
+                        <input type="checkbox" id="exempteffect" class="exemption">
+                    </fieldset>
+
+
                 </div>
 
                 <div id="customizerBottomRow">
