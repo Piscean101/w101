@@ -1,10 +1,10 @@
 const singleEffectField = document.getElementById("singleEffectField");
 const massEffectField = document.getElementById("massEffectField");
 
-//** ADD ALL SCHOOL
-// MINIONS SHIELDS GLOBALS
-// TRAPS/CONVERTS AURAS
-//  */
+export const findSchool = () => {
+    var school = localStorage.getItem("school");
+    return school;
+}
 
 export const effectLibrary = {
 
@@ -39,18 +39,18 @@ export const effectLibrary = {
             desc: '+1 Pip Self',
             html: `+1 <img src="./images/iconeffects/Pip.png" class="spellIcon"/> <img src="./images/iconeffects/Caster.png" class="spellIcon"/>`
         },
-        BalanceBlade: {
-            name: 'Balance Blade',
-            cost: 0,
-            desc: '+25% next outgoing hit',
-            html: `+25% <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
-        },
-        DeathBlade: {
-            name: 'Death Blade',
-            cost: 0,
-            desc: '+35% next outgoing Death hit',
-            html: `+35% <img src="./images/iconeffects/Death.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
-        },
+        // BalanceBlade: {
+        //     name: 'Balance Blade',
+        //     cost: 0,
+        //     desc: '+25% next outgoing hit',
+        //     html: `+25% <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
+        // },
+        // DeathBlade: {
+        //     name: 'Death Blade',
+        //     cost: 0,
+        //     desc: '+35% next outgoing Death hit',
+        //     html: `+35% <img src="./images/iconeffects/Death.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
+        // },
         ElementalBlade: {
             name: 'Elemental Blade',
             cost: 1,
@@ -63,11 +63,17 @@ export const effectLibrary = {
             desc: '+30% next incoming Fire, Ice and Storm hits',
             html: `+30% <img src="./images/iconeffects/Damage.png" class="spellIcon"/><img src="./images/iconeffects/Trap.png" class="spellIcon"/> to next <img src="./images/iconeffects/Fire.png" class="spellIcon"/>, <img src="./images/iconeffects/Ice.png" class="spellIcon"/> and <img src="./images/iconeffects/Storm.png" class="spellIcon"/> spells`
         },
-        FireBlade: {
-            name: 'Fire Blade',
-            cost: 0,
-            desc: '+35% next outgoing Fire hit',
-            html: `+35% <img src="./images/iconeffects/Fire.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
+        // FireBlade: {
+        //     name: 'Fire Blade',
+        //     cost: 0,
+        //     desc: '+35% next outgoing Fire hit',
+        //     html: `+35% <img src="./images/iconeffects/Fire.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
+        // },
+        Feint: {
+            name: 'Feint',
+            cost: 1,
+            desc: '+70% next hit on Target +30% next hit on Self',
+            html: `+30% next <img src="./images/iconeffects/Damage.png" class="spellIcon"/> Target +30% next <img src="./images/iconeffects/Damage.png" class="spellIcon"/> Self`
         },
         GuidingLight: {
             name: 'Guiding Light',
@@ -75,24 +81,24 @@ export const effectLibrary = {
             desc: '+35% next outgoing heal',
             html: `+35% next <img src="./images/iconeffects/Heal.png" class="spellIcon"/> spell`
         },
-        IceBlade: {
-            name: 'Ice Blade',
-            cost: 0,
-            desc: '+35% next outgoing Ice hit',
-            html: `+35% <img src="./images/iconeffects/Ice.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
-        },
+        // IceBlade: {
+        //     name: 'Ice Blade',
+        //     cost: 0,
+        //     desc: '+35% next outgoing Ice hit',
+        //     html: `+35% <img src="./images/iconeffects/Ice.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
+        // },
         Infection: {
             name: 'Infection',
             cost: 0,
             desc: '-65% next outgoing heal',
             html: `-65% next <img src="./images/iconeffects/Heal.png" class="spellIcon"/> spell`
         },
-        LifeBlade: {
-            name: 'Life Blade',
-            cost: 0,
-            desc: '+35% next outgoing Life hit',
-            html: `+35% <img src="./images/iconeffects/Life.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
-        },
+        // LifeBlade: {
+        //     name: 'Life Blade',
+        //     cost: 0,
+        //     desc: '+35% next outgoing Life hit',
+        //     html: `+35% <img src="./images/iconeffects/Life.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
+        // },
         ManaAttack: {
             name: 'Mana Attack',
             cost: 1,
@@ -105,11 +111,42 @@ export const effectLibrary = {
             desc: '-3 Pips from target',
             html: `-3 <img src="./images/iconeffects/Pip.png" class="spellIcon"/>`
         },
-        MythBlade: {
-            name: 'Myth Blade',
+        // MythBlade: {
+        //     name: 'Myth Blade',
+        //     cost: 0,
+        //     desc: '+35% next outgoing Myth hit',
+        //     html: `+35% <img src="./images/iconeffects/Myth.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
+        // },
+        SchoolAura: {
+            name: 'School Aura',
             cost: 0,
-            desc: '+35% next outgoing Myth hit',
-            html: `+35% <img src="./images/iconeffects/Myth.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
+            desc: '+25% outgoing School-based damage for 4 rounds'
+        },
+        SchoolBlade: {
+            name: 'School Blade',
+            cost: 0,
+            desc: '+35% next outgoing School-based attack',
+            // html: `+35% <img src="./images/iconeffects/Fire.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
+        },
+        SchoolGlobal: {
+            name: 'School Global',
+            cost: 2,
+            desc: '+25% all School-based attacks'
+        },
+        SchoolPrism: {
+            name: 'School Prism',
+            cost: 0,
+            desc: `Convert next School-based hit`
+        },
+        SchoolShield: {
+            name: 'School Shield',
+            cost: 0,
+            desc: '-80% next incoming School-based attack',
+        },
+        SchoolTrap: {
+            name: 'School Trap',
+            cost: 0,
+            desc: '40% next incoming School-based attack'
         },
         SpiritBlade: {
             name: 'Spirit Blade',
@@ -129,12 +166,12 @@ export const effectLibrary = {
             desc: 'Steal 1 Pip from target',
             html: `Steal 1 <img src="./images/iconeffects/Pip.png" class="spellIcon"/>`
         },
-        StormBlade: {
-            name: 'Storm Blade',
-            cost: 0,
-            desc: '+35% next outgoing Storm hit',
-            html: `+35% <img src="./images/iconeffects/Storm.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
-        },
+        // StormBlade: {
+        //     name: 'Storm Blade',
+        //     cost: 0,
+        //     desc: '+35% next outgoing Storm hit',
+        //     html: `+35% <img src="./images/iconeffects/Storm.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
+        // },
         Stun: {
             name: 'Stun',
             cost: 0,
@@ -268,7 +305,7 @@ export const createSecondaryEffectSelect = (name,desc,cost,type) => {
         newSecondary.classList.add("massTarget");
         massEffectField.appendChild(newSecondary);
     }
-}
+};
 
 export const displayLibrary = (lib) => {
     for (const [key,val] of Object.entries(lib['Single'])) {

@@ -252,11 +252,59 @@ export const convertEffects = (effectTax = calcEffectTax()) => {
     secondaryEffectList.forEach((e) => {
         var secondaryEffectDisplay = '';
         var name = e.classList[3].replace(" ","");
-        if(e.classList.contains("Single")) {
-            secondaryEffectDisplay = effectLibrary['Single'][name].html;
-        } else {
-            secondaryEffectDisplay = effectLibrary['Mass'][name].html;
-        }
+        var school = document.getElementById("schoolSelect").value;
+        switch (e.classList[3]) {
+            case 'SchoolAura':
+                secondaryEffectDisplay = `+25% <img src="./images/iconeffects/${school}.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/> for 4 <img src="./images/iconeffects/Round.png" class="spellIcon"/>`;
+                break;
+            case 'SchoolBlade':
+                secondaryEffectDisplay = `+35% <img src="./images/iconeffects/${school}.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`;
+                break;
+            case 'SchoolTrap':
+                secondaryEffectDisplay = `+40% <img src="./images/iconeffects/${school}.png" class="spellIcon"/> <img src="./images/iconeffects/Damage.png" class="spellIcon"/> <img src="./images/iconeffects/Trap.png" class="spellIcon"/>`;
+                break;
+            case 'SchoolShield':
+                secondaryEffectDisplay = `-80% next <img src="./images/iconeffects/Incoming.png" class="spellIcon"/> <img src="./images/iconeffects/${school}.png" class="spellIcon"/> <img src="./images/iconeffects/Damage.png" class="spellIcon"/> spell`;
+                break;
+            case 'SchoolMinion':
+                secondaryEffectDisplay = `Summon <img src="./images/iconeffects/${school}.png" class="spellIcon"/> <img src="./images/iconeffects/Minion.png" class="spellIcon"/>`;
+                break;
+            case 'SchoolGlobal':
+                secondaryEffectDisplay = `+25% <img src="./images/iconeffects/Damage.png" class="spellIcon"/> to all <img src="./images/iconeffects/${school}.png" class="spellIcon"/> spells`;
+                break;
+            case 'SchoolPrism': 
+                switch (school) {
+                    case 'Fire':
+                        secondaryEffectDisplay = `Convert next <img src="./images/iconeffects/${school}.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/> to <img src="./images/iconeffects/Ice.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/>`;
+                        break;
+                    case 'Ice':
+                        secondaryEffectDisplay = `Convert next <img src="./images/iconeffects/${school}.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/> to <img src="./images/iconeffects/Fire.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/>`;
+                        break;
+                    case 'Storm':
+                        secondaryEffectDisplay = `Convert next <img src="./images/iconeffects/${school}.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/> to <img src="./images/iconeffects/Myth.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/>`;
+                        break;
+                    case 'Myth':
+                        secondaryEffectDisplay = `Convert next <img src="./images/iconeffects/${school}.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/> to <img src="./images/iconeffects/Storm.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/>`;
+                        break;
+                    case 'Life':
+                        secondaryEffectDisplay = `Convert next <img src="./images/iconeffects/${school}.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/> to <img src="./images/iconeffects/Death.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/>`;
+                        break;
+                    case 'Death':
+                        secondaryEffectDisplay = `Convert next <img src="./images/iconeffects/${school}.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/> to <img src="./images/iconeffects/Ice.png" class="spellIcon"/><img src="./images/iconeffects/Damage.png" class="spellIcon"/>`;
+                        break;
+                    default: 
+                        secondaryEffectDisplay = 'CONVERT NOT AVAILABLE'
+                        break;
+                }
+                break;
+            default:
+                if(e.classList.contains("Single")) {
+                    secondaryEffectDisplay = effectLibrary['Single'][name].html;
+                } else {
+                    secondaryEffectDisplay = effectLibrary['Mass'][name].html;
+                }
+            break;
+        } 
         e.innerHTML = secondaryEffectDisplay;
     });
 };

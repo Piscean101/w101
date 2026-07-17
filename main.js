@@ -52,6 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const generateSpellButton = document.getElementById("generateSpell");
 
+    const download = document.getElementById("download");
+
     chooseOTTime.addEventListener("change", (e) => {
         updateValue(OTTimeTemp,e.target.value);
     });
@@ -147,6 +149,16 @@ document.addEventListener("DOMContentLoaded", () => {
     closeHiddenWindow.addEventListener("click", (e) => {
         hiddenEffectPanel.classList.add("hidden");
     });
+
+    // download.addEventListener("click", () => {
+    //     const spellImg = document.getElementById("spellImage");
+    //     const imgData = spellImg.toDataURL("image/png");
+    //     console.log(imgData)
+    //     const link = document.createElement("a");
+    //     link.href = imgData;
+    //     link.download = "div_image.png";
+    //     link.click();
+    // })
 
 });
 
