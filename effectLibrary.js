@@ -45,8 +45,32 @@ export const effectLibrary = {
         //     desc: '+25% next outgoing hit',
         //     html: `+25% <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
         // },
+        Beguile: {
+            name: 'Beguile',
+            cost: 3,
+            desc: 'Beguile Target for 1 Round',
+            html: `<span class="effectKeyword">Beguile</span>&nbsp; Target 1 <img src="./images/iconeffects/Round.png" class="spellIcon"/>`
+        },
+        CleanseCharm: {
+            name: 'Cleanse Charm',
+            cost: 0,
+            desc: 'Remove 1 Negative Charm',
+            html: 'Remove <img src="./images/iconeffects/Charm_Neg.png" class="spellIcon"/>'
+        },
+        CleanseWard: {
+            name: 'Cleanse Ward',
+            cost: 0,
+            desc: 'Remove 1 Negative Ward',
+            html: `Remove <img src="./images/iconeffects/Ward_Neg.png" class="spellIcon"/>`
+        },
         Confusion: {
             name: 'Confusion',
+            cost: 1,
+            desc: 'Confuse Target',
+            html: `<span class="effectKeyword"/>Confuse</span> <img src="./images/iconeffects/Enemy.png" class="spellIcon"/> (1 <img src="./images/iconeffects/Round.png" class="spellIcon"/>)`
+        },
+        Confusion50: {
+            name: 'Confusion50',
             cost: 0,
             desc: '50% chance to Confuse Target',
             html: `50% &nbsp;<span class="effectKeyword"/>Confuse</span> <img src="./images/iconeffects/Enemy.png" class="spellIcon"/> (1 <img src="./images/iconeffects/Round.png" class="spellIcon"/>)`
@@ -57,6 +81,24 @@ export const effectLibrary = {
         //     desc: '+35% next outgoing Death hit',
         //     html: `+35% <img src="./images/iconeffects/Death.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
         // },
+        Disarm: {
+            name: 'Disarm',
+            cost: 0,
+            desc: 'Remove Positive Charm',
+            html: `Remove <img src="./images/iconeffects/Charm.png" class="spellIcon"/>`
+        },
+        DisarmDouble: {
+            name: 'Disarm Double',
+            cost: 1,
+            desc: 'Remove 2 Positive Charms',
+            html: `Remove 2 <img src="./images/iconeffects/Charm.png" class="spellIcon"/>`
+        },
+        DisarmTriple: {
+            name: 'Disarm Triple',
+            cost: 2,
+            desc: 'Remove 3 Positive Charms',
+            html: `Remove 3 <img src="./images/iconeffects/Charm.png" class="spellIcon"/>`
+        },
         DonatePower: {
             name: 'Donate Power',
             cost: 1,
@@ -81,6 +123,12 @@ export const effectLibrary = {
         //     desc: '+35% next outgoing Fire hit',
         //     html: `+35% <img src="./images/iconeffects/Fire.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
         // },
+        Enfeeble: {
+            name: 'Enfeeble',
+            cost: 3,
+            desc: 'Remove all positive Charms',
+            html: `Remove all <img src="./images/iconeffects/Charm.png" class="spellIcon"/>`
+        },
         Feint: {
             name: 'Feint',
             cost: 1,
@@ -141,6 +189,36 @@ export const effectLibrary = {
         //     desc: '+35% next outgoing Myth hit',
         //     html: `+35% <img src="./images/iconeffects/Myth.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
         // },
+        Pacify: {
+            name: 'Pacify',
+            cost: 0,
+            desc: 'Pacify Self 1 Round',
+            html: `<img src="./images/iconeffects/Pacify.png" class="spellIcon"/> Self 1 <img src="./images/iconeffects/Round.png" class="spellIcon"/>`
+        },
+        Pierce: {
+            name: 'Pierce',
+            cost: 0,
+            desc: 'Remove Positive Ward',
+            html: `Remove <img src="./images/iconeffects/Ward.png" class="spellIcon"/>`
+        },
+        PierceDouble: {
+            name: 'Pierce Double',
+            cost: 1,
+            desc: 'Remove 2 Positive Wards',
+            html: `Remove 2 <img src="./images/iconeffects/Ward.png" class="spellIcon"/>`
+        },
+        PierceTriple: {
+            name: 'Pierce Triple',
+            cost: 2,
+            desc: 'Remove 3 Positive Wards',
+            html: `Remove 3 <img src="./images/iconeffects/Charm.png" class="spellIcon"/>`
+        },
+        Purge: {
+            name: 'Purge',
+            cost: 2,
+            desc: 'Remove 3 Negative Charms',
+            html: `Remove 3 <img src="./images/iconeffects/Charm_Neg.png" class="spellIcon"/>`
+        },
         SchoolAura: {
             name: 'School Aura',
             cost: 0,
@@ -177,6 +255,12 @@ export const effectLibrary = {
             cost: 0,
             desc: '40% next incoming School-based attack'
         },
+        Shatter: {
+            name: 'Shatter',
+            cost: 3,
+            desc: 'Remove all positive Wards',
+            html: `Remove all <img src="./images/iconeffects/Ward.png" class="spellIcon"/>`
+        },
         SpiritBlade: {
             name: 'Spirit Blade',
             cost: 1,
@@ -189,11 +273,47 @@ export const effectLibrary = {
             desc: '+30% next incoming Life, Myth and Death hits',
             html: `+30% <img src="./images/iconeffects/Damage.png" class="spellIcon"/><img src="./images/iconeffects/Trap.png" class="spellIcon"/> to next <img src="./images/iconeffects/Life.png" class="spellIcon"/>, <img src="./images/iconeffects/Myth.png" class="spellIcon"/> and <img src="./images/iconeffects/Death.png" class="spellIcon"/> spells`
         },
+        StealCharm: {
+            name: 'Steal Charm',
+            cost: 1,
+            desc: 'Steal Positive Charm',
+            html: `<span class="effectKeyword">Steal</span> <img src="./images/iconeffects/Charm.png" class="spellIcon"/>`
+        },
+        StealCharmDouble: {
+            name: 'Steal Charm Double',
+            cost: 2,
+            desc: 'Steal 2 Positive Charms',
+            html: `<span class="effectKeyword">Steal</span> 2 <img src="./images/iconeffects/Charm.png" class="spellIcon"/>`
+        },
+        StealCharmTriple: {
+            name: 'Steal Charm Triple',
+            cost: 3,
+            desc: 'Steal 3 Positive Charms',
+            html: `<span class="effectKeyword">Steal</span> 3 <img src="./images/iconeffects/Charm.png" class="spellIcon"/>`
+        },
         StealPip: {
             name: 'Steal Pip',
             cost: 0,
             desc: 'Steal 1 Pip from target',
-            html: `Steal 1 <img src="./images/iconeffects/Pip.png" class="spellIcon"/> from Target`
+            html: `<span class="effectKeyword">Steal</span> 1 <img src="./images/iconeffects/Pip.png" class="spellIcon"/> from Target`
+        },
+        StealWard: {
+            name: 'Steal Ward',
+            cost: 1,
+            desc: 'Steal Positive Ward',
+            html: `<span class="effectKeyword">Steal</span> <img src="./images/iconeffects/Ward.png" class="spellIcon"/>`
+        },
+        StealWardDouble: {
+            name: 'Steal Ward Double',
+            cost: 2,
+            desc: 'Steal 2 Positive Wards',
+            html: `<span class="effectKeyword">Steal</span> 2 <img src="./images/iconeffects/Ward.png" class="spellIcon"/>`
+        },
+        StealWardTriple: {
+            name: 'Steal Ward Triple',
+            cost: 3,
+            desc: 'Steal 3 Positive Wards',
+            html: `<span class="effectKeyword">Steal</span> 3 <img src="./images/iconeffects/Ward.png" class="spellIcon"/>`
         },
         // StormBlade: {
         //     name: 'Storm Blade',
@@ -225,6 +345,12 @@ export const effectLibrary = {
             desc: 'Block next incoming stun',
             html: `Block next inc. <img src="./images/iconeffects/Stun.png" class="spellIcon"/>`
         },
+        Taunt: {
+            name: 'Taunt',
+            cost: 0,
+            desc: 'Taunt Enemy for 1 Round',
+            html: `<img src="./images/iconeffects/Taunt.png" class="spellIcon"/> 1 <img src="./images/iconeffects/Round.png" class="spellIcon"/>`
+        },
         ThreefoldFever: {
             name: 'Threefold Fever',
             cost: 2,
@@ -243,6 +369,12 @@ export const effectLibrary = {
             desc: '-25% next outgoing hit',
             html: '-25% next <img src="./images/iconeffects/Damage.png" class="spellIcon"/>'
         },
+        Windstorm: {
+            name: 'Windstorm',
+            cost: 1,
+            desc: '+25% next Storm hit to all Enemies',
+            html: `+25% to next <img src="./images/iconeffects/Storm.png" class="spellIcon"/> <img src="./images/iconeffects/Damage.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/>`
+        }
     },
 
 
@@ -312,13 +444,19 @@ export const effectLibrary = {
             name: 'Mass Steal Pip',
             cost: 2,
             desc: 'Steal 1 Pip from all enemies',
-            html: 'Steal 1 <img src="./images/iconeffects/Pip.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/>'
+            html: '<span class="effectKeyword">Steal</span> 1 <img src="./images/iconeffects/Pip.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/>'
         },
         MassStun: {
             name: 'Mass Stun',
             cost: 1,
             desc: 'Stun all enemies for 1 Round',
             html: `<img src="./images/iconeffects/Stun.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/> for 1 <img src="./images/iconeffects/Round.png" class="spellIcon"/>`
+        },
+        MassTaunt: {
+            name: 'Mass Taunt',
+            cost: 1,
+            desc: 'Taunt all Enemies',
+            html: `<img src="./images/iconeffects/Taunt.png" class="spellIcon"/> 1 <img src="./images/iconeffects/Round.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/>`
         },
         Plague: {
             name: 'Plague',
