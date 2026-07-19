@@ -4,6 +4,7 @@
     --nicePink: pink;
     --niceGreen: rgb(68, 199, 68);
     --niceBlue: rgb(104, 178, 244);
+    --effectKeyword: rgb(157, 38, 38);
 }
 body {
     display: flex;
@@ -220,6 +221,10 @@ input[type="text"] {
     z-index: 50;
     background-color: transparent;
     display: flex;
+}
+
+.effectKeyword {
+    color: var(--effectKeyword);
 }
 
 .customizer {

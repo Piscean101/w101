@@ -81,10 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
             spellCostSchoolPip.classList.contains("hidden") ? spellCostSchoolPip.classList.remove("hidden") : null;
             spellCostSchoolPip.src = `./images/iconpips/${e.target.value}.png`;
         }
-    })
+    });
 
     loreCheck.addEventListener("click", (e) => {
-        defaultSchoolProfile(spellSchoolDisplay.innerHTML);
+        defaultSchoolProfile(spellSchoolInput.value);
     });
 
     spellCostInput.addEventListener("change", (e) => {

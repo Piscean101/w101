@@ -263,6 +263,9 @@ export const convertEffects = (effectTax = calcEffectTax()) => {
             case 'SchoolTrap':
                 secondaryEffectDisplay = `+40% <img src="./images/iconeffects/${school}.png" class="spellIcon"/> <img src="./images/iconeffects/Damage.png" class="spellIcon"/> <img src="./images/iconeffects/Trap.png" class="spellIcon"/>`;
                 break;
+            case 'SchoolFeint':
+                secondaryEffectDisplay = `+70% next <img src="./images/iconeffects/${school}.png" class="spellIcon"/> <img src="./images/iconeffects/Damage.png" class="spellIcon"/> +30% next <img src="./images/iconeffects/Damage.png" class="spellIcon"/> to Self`;
+                break;
             case 'SchoolShield':
                 secondaryEffectDisplay = `-80% next <img src="./images/iconeffects/Incoming.png" class="spellIcon"/> <img src="./images/iconeffects/${school}.png" class="spellIcon"/> <img src="./images/iconeffects/Damage.png" class="spellIcon"/> spell`;
                 break;

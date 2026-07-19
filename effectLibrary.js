@@ -45,12 +45,24 @@ export const effectLibrary = {
         //     desc: '+25% next outgoing hit',
         //     html: `+25% <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
         // },
+        Confusion: {
+            name: 'Confusion',
+            cost: 0,
+            desc: '50% chance to Confuse Target',
+            html: `50% &nbsp;<span class="effectKeyword"/>Confuse</span> <img src="./images/iconeffects/Enemy.png" class="spellIcon"/> (1 <img src="./images/iconeffects/Round.png" class="spellIcon"/>)`
+        },
         // DeathBlade: {
         //     name: 'Death Blade',
         //     cost: 0,
         //     desc: '+35% next outgoing Death hit',
         //     html: `+35% <img src="./images/iconeffects/Death.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
         // },
+        DonatePower: {
+            name: 'Donate Power',
+            cost: 1,
+            desc: 'Donate 2 Pips',
+            html: 'Give 2 <img src="./images/iconeffects/Pip.png" class="spellIcon"/> to Target',
+        },
         ElementalBlade: {
             name: 'Elemental Blade',
             cost: 1,
@@ -75,6 +87,12 @@ export const effectLibrary = {
             desc: '+70% next hit on Target +30% next hit on Self',
             html: `+30% next <img src="./images/iconeffects/Damage.png" class="spellIcon"/> Target +30% next <img src="./images/iconeffects/Damage.png" class="spellIcon"/> Self`
         },
+        GuardianSpirit: {
+            name: 'Guardian Spirit',
+            cost: 5,
+            desc: 'Target regains life after defeat',
+            html: 'Target regains 15% <img src="./images/iconeffects/Heal.png" class="spellIcon"/> after being defeated'
+        },
         GuidingLight: {
             name: 'Guiding Light',
             cost: 0,
@@ -92,6 +110,12 @@ export const effectLibrary = {
             cost: 0,
             desc: '-65% next outgoing heal',
             html: `-65% next <img src="./images/iconeffects/Heal.png" class="spellIcon"/> spell`
+        },
+        Infection55: {
+            name: 'Infection 55',
+            cost: 0,
+            desc: '-55% next outgoing heal',
+            html: `-55% next <img src="./images/iconeffects/Heal.png" class="spellIcon"/> spell`,
         },
         // LifeBlade: {
         //     name: 'Life Blade',
@@ -127,6 +151,11 @@ export const effectLibrary = {
             cost: 0,
             desc: '+35% next outgoing School-based attack',
             // html: `+35% <img src="./images/iconeffects/Fire.png" class="spellIcon"/> <img src="./images/iconeffects/Blade.png" class="spellIcon"/>`
+        },
+        SchoolFeint: {
+            name: 'School Feint',
+            cost: 1,
+            desc: '+70% next School-based hit to Target +30% next hit to Self'
         },
         SchoolGlobal: {
             name: 'School Global',
@@ -164,7 +193,7 @@ export const effectLibrary = {
             name: 'Steal Pip',
             cost: 0,
             desc: 'Steal 1 Pip from target',
-            html: `Steal 1 <img src="./images/iconeffects/Pip.png" class="spellIcon"/>`
+            html: `Steal 1 <img src="./images/iconeffects/Pip.png" class="spellIcon"/> from Target`
         },
         // StormBlade: {
         //     name: 'Storm Blade',
@@ -245,9 +274,15 @@ export const effectLibrary = {
         },
         MassAbsorb: {
             name: 'Mass Absorb',
-            cost: 4,
+            cost: 4.5,
             desc: 'Absorb 400 damage to all allies',
             html: '<img src="./images/iconeffects/Absorb.png" class="spellIcon"/> 400 <img src="./images/iconeffects/Damage.png" class="spellIcon"/> <img src="./images/iconeffects/Allies.png" class="spellIcon"/>'
+        },
+        MassGuardianSpirit: {
+            name: 'Mass Guardian Spirit',
+            cost: 6.5,
+            desc: 'All Allies regain 15% Health after being defeated',
+            html: '15% <img src="./images/iconeffects/Heal.png" class="spellIcon"/> after being defeated <img src="./images/iconeffects/Allies.png" class="spellIcon"/>'
         },
         MassInfection: {
             name: 'Mass Infection',
@@ -255,11 +290,35 @@ export const effectLibrary = {
             desc: '-45% next Heal to all enemies',
             html: `-45% next <img src="./images/iconeffects/Heal.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/>`
         },
+        MassManaAttack: {
+            name: 'Mass Mana Attack',
+            cost: 3,
+            desc: '-2 Pips to all enemies',
+            html: `-2 <img src="./images/iconeffects/Pip.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/>`
+        },
+        MassManaBurn: {
+            name: 'Mass Mana Burn',
+            cost: 4,
+            desc: '-3 Pips to all Enemies',
+            html: `-3 <img src="./images/iconeffects/Pip.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/>`
+        },
         MassStunShield: {
             name: 'Mass Stun Shield',
             cost: 1,
             desc: 'Block next inc. Stun to all allies',
             html: `Block next inc. <img src="./images/iconeffects/Stun.png" class="spellIcon"/> <img src="./images/iconeffects/Allies.png" class="spellIcon"/>`
+        },
+        MassStealPip: {
+            name: 'Mass Steal Pip',
+            cost: 2,
+            desc: 'Steal 1 Pip from all enemies',
+            html: 'Steal 1 <img src="./images/iconeffects/Pip.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/>'
+        },
+        MassStun: {
+            name: 'Mass Stun',
+            cost: 1,
+            desc: 'Stun all enemies for 1 Round',
+            html: `<img src="./images/iconeffects/Stun.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/> for 1 <img src="./images/iconeffects/Round.png" class="spellIcon"/>`
         },
         Plague: {
             name: 'Plague',
@@ -267,15 +326,9 @@ export const effectLibrary = {
             desc: '-20% next outgoing hit to all enemies',
             html: '-20% next <img src="./images/iconeffects/Damage.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/>'
         },
-        StunAll: {
-            name: 'Stun All',
-            cost: 1,
-            desc: 'Stun all enemies for 1 Round',
-            html: `<img src="./images/iconeffects/Stun.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/> for 1 <img src="./images/iconeffects/Round.png" class="spellIcon"/>`
-        },
         VirulentPlague: {
             name: 'Virulent Plague',
-            cost: 0,
+            cost: 2,
             desc: '-40% next outgoing hit to all enemies',
             html: `-40% next <img src="./images/iconeffects/Damage.png" class="spellIcon"/> <img src="./images/iconeffects/Enemies.png" class="spellIcon"/>`
         },

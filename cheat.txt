@@ -1,0 +1,3 @@
+Produce these spells by using the following parameters
+
+Fire Dragon: 7 Pips : Fire School : AoE : [Ignore Modifier: AoE] : 5 Weight Damage : 4 Weight OverTime Damage
