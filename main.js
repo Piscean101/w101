@@ -1,6 +1,7 @@
 import { schoolData, defaultSchoolProfile } from "./schoolData.js";
 import { createEffect, convertEffects, updateValue } from "./effectEngine.js";
 import { effectLibrary, displayLibrary } from "./effectLibrary.js";
+import html2canvas from "./node_modules/html2canvas";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -150,15 +151,13 @@ document.addEventListener("DOMContentLoaded", () => {
         hiddenEffectPanel.classList.add("hidden");
     });
 
-    // download.addEventListener("click", () => {
-    //     const spellImg = document.getElementById("spellImage");
-    //     const imgData = spellImg.toDataURL("image/png");
-    //     console.log(imgData)
-    //     const link = document.createElement("a");
-    //     link.href = imgData;
-    //     link.download = "div_image.png";
-    //     link.click();
-    // })
+    download.addEventListener("click", () => {
+        const spellImg = document.getElementById("spellImage");
+        html2canvas(spellImg).then(canvas => {
+            var url = canvas.toDataURL("image/png");
+            console.log(url);
+        })
+    })
 
 });
 
